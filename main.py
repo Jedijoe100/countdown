@@ -1,7 +1,7 @@
 """
 TODO Input Sanatisation
-TODO History
 TODO Layout
+TODO Game Testing
 """
 
 import tkinter as tk
@@ -67,6 +67,7 @@ class Main(tk.Tk):
         self.history_label.configure(state = "normal")
         self.history_label.insert(tk.INSERT, text+"\n")
         self.history_label.configure(state = "disabled")
+        self.history_label.see('end')
     
     def new_game(self):
         self.letter_array = np.zeros(26)
