@@ -9,8 +9,8 @@ The program will then give you the longest word(s).
 # Running
 The program requires Numpy and Tkinter (which is default with most versions of python).
 Then once in the directory run the following command to run the game.
-'''
+```
 python3 main.py
-'''
+```
 # Dictionary Source
 The dictionary was sources from [here](https://github.com/dwyl/english-words), this is not the same dictionary as in the game.
