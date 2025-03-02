@@ -1,7 +1,6 @@
 """
 TODO Input Sanatisation
 TODO Layout
-TODO Explaination
 
 Possible adjustments:
 - Better dictionary
@@ -141,23 +140,26 @@ class Main(tk.Tk):
         """
         game_letters = compute_letters(self.letters)
         longest_words = self.dictionary.find_longest_word(game_letters)
-        player_word = self.word_box.get('0.0', 'end').strip()
+        player_word = self.word_box.get('0.0', 'end').strip().lower()
         #need to check if player word only contains letters, remove uppercase
-        player_letters = compute_letters(player_word)
         string = f"Player Word: {player_word},"
-        #processing and displaying in history the round
-        if np.any(game_letters - player_letters < 0):
-            string += ' invalid letters, Word Score: 0'
-        elif player_word not in self.dictionary.word_set:
-            string += ' input not a word, Word Score: 0'
-        else:
-            score = len(player_word)
-            if score == LETTER_TOTAL:
+        if player_word.isalpha():
+            player_letters = compute_letters(player_word)
+            #processing and displaying in history the round
+            if np.any(game_letters - player_letters < 0):
+                string += ' invalid letters, Word Score: 0'
+            elif player_word not in self.dictionary.word_set:
+                string += ' input not a word, Word Score: 0'
+            else:
+                score = len(player_word)
+                if score == LETTER_TOTAL:
                 #so that the player scores double (18 if 9 letters) when they get the maximum length word
-                score *= 2
-            string += f' valid word, Word Score: {score}'
-            self.score += score
-            self.score_label['text'] = f"Score: {self.score}"
+                    score *= 2
+                string += f' valid word, Word Score: {score}'
+                self.score += score
+                self.score_label['text'] = f"Score: {self.score}"
+        else:
+            string += ' contains non-alphabet characters, Word Score: 0'
         self.add_to_history(string)
         if len(longest_words) > 1:
             self.add_to_history(f"Longest posible words: {', '.join(longest_words)}")
