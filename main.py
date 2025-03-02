@@ -1,7 +1,4 @@
 """
-TODO Input Sanatisation
-TODO Layout
-
 Possible adjustments:
 - Better dictionary
 - Generate a set collection of words and pull without replacement
@@ -51,33 +48,31 @@ class Main(tk.Tk):
         Generate the User Interface
         """
         self.title("Countdown")
-        self.geometry('600x600')
         self.explaination = tk.Label(self, text=self.explaination)
-        self.explaination.pack()
+        self.explaination.grid(row=0, column=0, columnspan=3)
         self.score_label = tk.Label(self, text='Score: 0')
-        self.score_label.pack()
+        self.score_label.grid(row=1, column=0)
         self.round_label = tk.Label(self, text='Round: 1')
-        self.round_label.pack()
-        self.timer_label = tk.Label(self, text=f'{self.time}s')
-        self.timer_label.pack()
-        self.selected_elements = tk.Label(self, text='')
-        self.selected_elements.pack()
+        self.round_label.grid(row=1, column=1)
+        self.timer_label = tk.Label(self, text=f'Time Left: {self.time}s')
+        self.timer_label.grid(row=1, column=2)
+        self.selected_elements = tk.Label(self, text='', font=("Arial", 25))
+        self.selected_elements.grid(row=2, column=1)
         self.vowel_button = tk.Button(self, text="Vowel", command=self.add_vowel)
-        self.vowel_button.pack()
+        self.vowel_button.grid(row=3, column=0)
         self.consonant_button = tk.Button(self, text="Consonant", command=self.add_consonant)
-        self.consonant_button.pack()
+        self.consonant_button.grid(row=3, column=2)
         self.word_box = tk.Text(self, height=1, width=9)
-        self.word_box.pack()
+        self.word_box.grid(row=4, column=1)
         self.next_round_button = tk.Button(self, text="Next Round", command=self.next_round)
-        self.next_round_button.pack()
+        self.next_round_button.grid(row=5, column=0)
         self.next_round_button['state']
         self.new_game_button = tk.Button(self, text="New Game", command=self.new_game)
-        self.new_game_button.pack()
-        #need to limit input to maximum 9 characters
+        self.new_game_button.grid(row=5, column=1)
         self.close_button = tk.Button(self, text="Close", command=lambda: self.destroy())
-        self.close_button.pack()
+        self.close_button.grid(row=5, column=2)
         self.history_label = tkst.ScrolledText(self)
-        self.history_label.pack()
+        self.history_label.grid(row=6, column=0, columnspan=3)
         self.history_label.insert(tk.INSERT, "Round 1\n")
         self.history_label.configure(state = "disabled")
 
@@ -141,7 +136,6 @@ class Main(tk.Tk):
         game_letters = compute_letters(self.letters)
         longest_words = self.dictionary.find_longest_word(game_letters)
         player_word = self.word_box.get('0.0', 'end').strip().lower()
-        #need to check if player word only contains letters, remove uppercase
         string = f"Player Word: {player_word},"
         if player_word.isalpha():
             player_letters = compute_letters(player_word)
@@ -184,7 +178,7 @@ class Main(tk.Tk):
         Reduces the timer calling itself until the time is finished
         """
         self.time -= 1
-        self.timer_label['text'] = f"{self.time}s"
+        self.timer_label['text'] = f"Time Left: {self.time}s"
         if self.time > 0:
             self.after(1000, self.game_loop)
         else:
