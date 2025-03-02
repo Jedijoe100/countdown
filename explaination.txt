@@ -1,0 +1,8 @@
+Welcome to the Letters round of Countdown!
+To play select a total of {LETTER_TOTAL} letters by choosing a random vowel or random consonant.
+At least {MINIMUM_CONSONANTS} consonants and {MINIMUM_VOWELS} vowels must be selected.
+As soon as {LETTER_TOTAL} letters have been selected the timer will start.
+You will then have {START_TIME} seconds to find the longest word from the given letters.
+You only score points if you choose a valid word with the given letters.
+You get the length of your word in points or {TWICE_LETTER_TOTAL} points if the word has {LETTER_TOTAL} letters.
+The game is played in {NUMBER_OF_ROUNDS} rounds.
